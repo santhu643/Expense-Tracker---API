@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -6,25 +7,17 @@ const Login = () => {
 
   const handleLogin = async () => {
     const user = { email, password };
-
+  
     try {
-      const res = await fetch('http://localhost:5000/expense/login', {
-        method: 'POST',
+      const res = await axios.post('http://localhost:3000/expense/login', user, {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(user),
       });
-
-      const data = await res.json();
-      if (res.ok) {
-        alert('Login success!');
-      }else {
-        alert('Login failed');
-      }
-    } catch (err) {
-      console.error(err);
-      alert('Error');
+  
+      console.log('Login successful:', res.data);
+    } catch (error) {
+      console.error('Login failed:', error.response?.data || error.message);
     }
   };
 

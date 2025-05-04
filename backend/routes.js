@@ -9,7 +9,7 @@ route.post('/login', async (req, res) => {
       res.json({ message: 'Login success' });
     }
   } catch (err) {
-    res.status(3000).json("Failed");
+    res.status(500).json("Failed");
   }
 });
 
