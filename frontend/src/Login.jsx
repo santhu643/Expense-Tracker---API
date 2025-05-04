@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate(); 
 
   const handleLogin = async () => {
     const user = { email, password };
@@ -15,7 +17,8 @@ const Login = () => {
         },
       });
   
-      console.log('Login successful:', res.data);
+      alert('Login successful:', res.data);
+      navigate('/index');
     } catch (error) {
       console.error('Login failed:', error.response?.data || error.message);
     }

@@ -27,7 +27,7 @@ async function loginUser(email, password) {
   if (!user) {
     throw new Error('User not found');
   }
-  if (user.password !== password) {
+  if (user.pass !== password) {
     throw new Error('Incorrect password');
   }
   return user;
@@ -36,4 +36,4 @@ async function loginUser(email, password) {
 const expmodel = mongoose.model("expenses",expenseschema);
 
 
-module.exports = loginUser;  
+module.exports = {loginUser};  
