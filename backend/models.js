@@ -36,4 +36,4 @@ async function loginUser(email, password) {
 const expmodel = mongoose.model("expenses",expenseschema);
 
 
-module.exports = { loginUser }; 
+module.exports = loginUser;  

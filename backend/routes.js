@@ -5,9 +5,11 @@ route.post('/login', async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await loginUser(email, password);
-    res.json({ message: 'Login success' });
+    if(user){
+      res.json({ message: 'Login success' });
+    }
   } catch (err) {
-    res.status(500).json("Failed");
+    res.status(3000).json("Failed");
   }
 });
 
