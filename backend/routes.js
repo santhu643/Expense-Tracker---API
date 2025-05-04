@@ -1,5 +1,6 @@
 const express = require("express");
 const route = express.Router();
+const {loginUser} = require("./models.js");
 
 route.post('/login', async (req, res) => {
   const { email, password } = req.body;
