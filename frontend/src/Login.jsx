@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -22,6 +24,8 @@ const Login = () => {
         <input type="email" name="email" placeholder="Email" onChange={handleChange} style={styles.input} />
         <input type="password" name="password" placeholder="Password" onChange={handleChange} style={styles.input} />
         <button type="submit" style={styles.button}>Login</button>
+        <p style={styles.text}>Don't have an account? <Link to="/register">Register</Link></p>
+
       </form>
     </div>
   );
