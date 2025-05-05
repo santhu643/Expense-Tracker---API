@@ -7,15 +7,12 @@ const Index = () => {
   const [amount, setAmount] = useState('');
   const [category, setCategory] = useState('');
 
- 
 
-  useEffect(()=>{
-    fetch();
-  },[])
 
-  async function fetch() {
+  async function addexp() {
     try{
-    const result = await axios.get('http://localhost:3000/expense/addexp');
+    const data = {description,amount,category};
+    const result = await axios.get('http://localhost:3000/expense/addexp',data);
     if(result){
       alert('expense added');
     }
@@ -33,12 +30,7 @@ const Index = () => {
       <h1 style={styles.title}>Expense Tracker</h1>
 
       {/* Form */}
-      <form   onSubmit={(e) => {
-          e.preventDefault();
-          setDescription('');
-          setAmount('');
-          setCategory('');
-        }}
+      <form   onSubmit={addexp}
         style={styles.form}>
         <input
           type="text"
