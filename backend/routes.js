@@ -1,6 +1,6 @@
 const express = require("express");
 const route = express.Router();
-const {loginUser,regUser,addExp} = require("./models.js");
+const {loginUser,regUser,addExp,getExp} = require("./models.js");
 
 route.post('/login', async (req, res) => {
   const { email, password } = req.body;
@@ -42,7 +42,7 @@ route.get('/getexp',async(req,res)=>{
   try{
     const exp = await getExp();
     if(exp){
-      res.status(200).json({message:"details fetched succesfully",data:exp});
+      res.status(200).json({message:"details fetched succesfully",expenses:exp});
     }
   }catch(err){
     res.status(500).json("Failed");

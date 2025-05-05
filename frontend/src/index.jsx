@@ -1,51 +1,54 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const Index = () => {
+  const Index = () => {
 
-  const [desc, setDescription] = useState('');
-  const [amt, setAmount] = useState('');
-  const [catog, setCategory] = useState('');
+    const [desc, setDescription] = useState('');
+    const [amt, setAmount] = useState('');
+    const [catog, setCategory] = useState('');
+    const [expdata,setData] = useState([]);
 
-  useEffect(()=>{
-    fetch();
-  },[]);
+    useEffect(()=>{
+      fetch();
+    },[]);
 
-  async function fetch(){
-    const data = await axios.get('http://localhost:3000/expense/getexp',{
-      headers:{
-        'Content-Type': 'application/json',
-      },
-    });
-    console.log(data.data);
-
-  }
-
-
-  async function addexp(e) {
-    e.preventDefault();
-    try{
-    const data = {desc,amt,catog};
-    console.log(data);
-    const result = await axios.post('http://localhost:3000/expense/addexp',data,{
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    if(result.status==200){
-      setDescription(" ");
-      setAmount(" ");
-      setCategory(" ");
+    async function fetch(){
+      const resp = await axios.get('http://localhost:3000/expense/getexp',{
+        headers:{
+          'Content-Type': 'application/json',
+        },
+      });
+      setData(resp.data.expenses);
       
-      alert("expense added");
-
 
     }
+
+
+    async function addexp(e) {
+      e.preventDefault();
+      try{
+      const data = {desc,amt,catog};
+      console.log(data);
+      const result = await axios.post('http://localhost:3000/expense/addexp',data,{
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if(result.status==200){
+        setDescription("");
+        setAmount("");
+        setCategory("");
+        
+        alert("expense added");
+        fetch();
+
+
+      }
+      }
+      catch(err){
+        console.log('error occured');
+      }
     }
-    catch(err){
-      console.log('error occured');
-    }
-  }
 
   
 
@@ -93,9 +96,24 @@ const Index = () => {
             <th style={styles.th}>Description</th>
             <th style={styles.th}>Amount</th>
             <th style={styles.th}>Category</th>
+            <th style={styles.th}>Action</th>
           </tr>
         </thead>
         <tbody>
+          {expdata.map((dt,index)=>
+            <tr key={dt._id}>
+              <td>{index+1}</td>
+              <td>{dt.desc}</td>
+              <td>{dt.amt}</td>
+              <td>{dt.catog}</td>
+              <td><button>Edit</button>&nbsp;<button>Delete</button></td>
+
+
+
+
+            </tr>
+          )}
+     
 
         </tbody>
       </table>
