@@ -7,10 +7,15 @@ import axios from "axios";
     const [amt, setAmount] = useState('');
     const [catog, setCategory] = useState('');
     const [expdata,setData] = useState([]);
+  
+    const[edesc,setEdesc] = useState('');
+    const[eamt,setEamt] = useState('');
+    const[ecatog,setEcatog] = useState('');
+    const[eid,setEid] = useState('');
 
     useEffect(()=>{
       fetch();
-    },[]);
+    },[]);  
 
     async function fetch(){
       const resp = await axios.get('http://localhost:3000/expense/getexp',{
@@ -51,11 +56,7 @@ import axios from "axios";
     async function delexp(id){
       try{
         console.log(id);
-        const res = await axios.delete(`http://localhost:3000/expense/delete/${id}`,{
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
+        const res = await axios.delete(`http://localhost:3000/expense/delete/${id}`);
         if(res.status==200){
           alert("deleted");
           fetch();
@@ -65,6 +66,19 @@ import axios from "axios";
         console.log(err);
       }
 
+    }
+
+    function updexp(dt){
+    
+      setEdesc(dt.desc);
+      setEamt(dt.amt);
+      setEcatog(dt.catog);
+      setEid(dt._id);
+
+      console.log(edesc);
+      console.log(eamt);
+
+      
     }
 
   
@@ -123,15 +137,16 @@ import axios from "axios";
               <td>{dt.desc}</td>
               <td>{dt.amt}</td>
               <td>{dt.catog}</td>
-              <td><button>Edit</button>&nbsp;<button value={dt._id} onClick={(e)=>delexp(e.target.value)}>Delete</button></td>
+              <td><button onClick={()=>updexp(dt)} data-toggle="modal" data-target="#exampleModal">Edit</button>&nbsp;<button value={dt._id} onClick={(e)=>delexp(e.target.value)}>Delete</button></td>
               
             </tr>
           )}
-     
 
         </tbody>
       </table>
     </div>
+   
+    
   );
 };
 

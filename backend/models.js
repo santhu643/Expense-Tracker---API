@@ -56,7 +56,6 @@ async function getExp() {
 
 async function deleteExp(id) {
   const data = expmodel.findByIdAndDelete(id);
-  data.save();
   return data;
 }
 
