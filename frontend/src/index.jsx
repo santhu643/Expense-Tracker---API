@@ -69,17 +69,20 @@ import axios from "axios";
     }
 
     function updexp(dt){
-    
       setEdesc(dt.desc);
       setEamt(dt.amt);
       setEcatog(dt.catog);
       setEid(dt._id);
-
+      toggleModal(true);
       console.log(edesc);
       console.log(eamt);
-
-      
     }
+
+    function toggleModal(show) {
+      const modal = document.getElementById("editModal");
+      if (modal) modal.style.display = show ? "flex" : "none";
+    }
+     
 
   
 
@@ -141,14 +144,27 @@ import axios from "axios";
               
             </tr>
           )}
-
+  <div className="modal" id="editModal" style={{ display: "none", position: "fixed", top: 0, left: 0, backgroundColor: "#00000090", width: "100%", height: "100%", justifyContent: "center", alignItems: "center" }}>
+      <div style={{ background: "#fff", padding: "20px", borderRadius: "10px", width: "300px", position: "relative" }}>
+        <h3>Edit Expense</h3>
+        <input type="text" value={edesc} onChange={(e) => setEdesc(e.target.value)} placeholder="Description" style={styles.input} />
+        <input type="number" value={eamt} onChange={(e) => setEamt(e.target.value)} placeholder="Amount" style={styles.input} />
+        <input type="text" value={ecatog} onChange={(e) => setEcatog(e.target.value)} placeholder="Category" style={styles.input} />
+        <button onClick={} style={{ ...styles.button, marginTop: "10px" }}>Update</button>
+        <button onClick={() => toggleModal(false)} style={{ marginLeft: "10px" }}>Cancel</button>
+      </div>
+    </div>
         </tbody>
       </table>
     </div>
+    
    
     
   );
 };
+
+  
+
 
 const styles = {
   container: {
