@@ -7,7 +7,7 @@ route.post('/login', async (req, res) => {
   try {
     const user = await loginUser(email, password);
     if(user){
-      res.json({ message: 'Login success' });
+      res.status(200).json({ message: 'Login success' });
     }
   } catch (err) {
     res.status(500).json("Failed");
@@ -31,12 +31,25 @@ route.post('/addexp',async(req,res)=>{
   try{
     const exp = await addExp(desc,amt,catog);
     if(exp){
-      res.json({message:"Expense added Succesfully"});
+      res.status(200).json({message:"Expense added Succesfully"});
     }
   } catch(err){
     res.status(500).json("Failed");
   }
 });
+
+route.get('/getexp',async(req,res)=>{
+  try{
+    const exp = await getExp();
+    if(exp){
+      res.status(200).json({message:"details fetched succesfully",data:exp});
+    }
+  }catch(err){
+    res.status(500).json("Failed");
+  }
+
+
+})
 
 
 
