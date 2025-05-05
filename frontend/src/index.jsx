@@ -106,11 +106,8 @@ import axios from "axios";
               <td>{dt.desc}</td>
               <td>{dt.amt}</td>
               <td>{dt.catog}</td>
-              <td><button>Edit</button>&nbsp;<button>Delete</button></td>
-
-
-
-
+              <td><button>Edit</button>&nbsp;<button value={dt._id} onClick={(e)=>delexp(e.target.value)}>Delete</button></td>
+              
             </tr>
           )}
      
