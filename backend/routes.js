@@ -26,10 +26,6 @@ route.post('/register',async(req,res)=>{
   }
 });
 
-<<<<<<< HEAD
-
-
-=======
 route.post('/addexp',async(req,res)=>{
   const {desc,amt,catog} = req.body;
   try{
@@ -41,6 +37,5 @@ route.post('/addexp',async(req,res)=>{
     res.status(500).json("Failed");
   }
 });
->>>>>>> dcf46a0e580b6a595837f42a76a0c4361f3dc9b7
 
 module.exports = route;
