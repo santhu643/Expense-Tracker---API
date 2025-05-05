@@ -3,25 +3,28 @@ import axios from "axios";
 
 const Index = () => {
 
-  const [description, setDescription] = useState('');
-  const [amount, setAmount] = useState('');
-  const [category, setCategory] = useState('');
+  const [desc, setDescription] = useState('');
+  const [amt, setAmount] = useState('');
+  const [catog, setCategory] = useState('');
 
 
 
-  async function addexp() {
+  async function addexp(e) {
+    e.preventDefault();
     try{
-    const data = {description,amount,category};
+    const data = {desc,amt,catog};
+    console.log(data);
     const result = await axios.post('http://localhost:3000/expense/addexp',data,{
       headers: {
         'Content-Type': 'application/json',
       },
     });
-    
     if(result){
-      alert('expense added');
-    }
+      
+      alert("expense added");
 
+
+    }
     }
     catch(err){
       console.log('error occured');
