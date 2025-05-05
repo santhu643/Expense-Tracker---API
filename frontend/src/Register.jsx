@@ -1,33 +1,46 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-const Register = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-  });
+  const Register = () => {
+    const [name,setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [pass,setPass] = useState("");
+    const navigate = useNavigate(); 
+    
 
-  const handleChange = (e) => {
-    setFormData({...formData, [e.target.name]: e.target.value});
-  };
+    async function register(){
+      const user = {name,email,pass};
+      try {
+        const res = await axios.post('http://localhost:3000/expense/register', user, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+    
+        alert('registered successful:', res);
+        navigate('/');
+      } catch (error) {
+        console.error('register failed:', error.response?.data || error.message);
+      }
+    };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Register Data:', formData);
-  };
+
+
 
   return (
     <div style={styles.container}>
-      <form onSubmit={handleSubmit} style={styles.form}>
+      <form onSubmit={register} style={styles.form}>
         <h2 style={styles.heading}>Register</h2>
-        <input type="text" name="name" placeholder="Name" onChange={handleChange} style={styles.input} />
-        <input type="email" name="email" placeholder="Email" onChange={handleChange} style={styles.input} />
-        <input type="password" name="password" placeholder="Password" onChange={handleChange} style={styles.input} />
+        <input type="text" name="name" placeholder="Name" onChange={(e)=>setName(e.target.value)} style={styles.input} />
+        <input type="email" name="email" placeholder="Email" onChange={(e)=>setEmail(e.target.value)}  style={styles.input} />
+        <input type="password" name="password" placeholder="Password" onChange={(e)=>setPass(e.target.value)}  style={styles.input} />
         <button type="submit" style={styles.button}>Register</button>
       </form>
     </div>
   );
 };
+
 
 const styles = {
   container: {

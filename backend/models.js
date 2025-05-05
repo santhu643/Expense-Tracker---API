@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const userschema = new mongoose.Schema(
   {
+    name:String,
     email: String,
     pass: String,
   },
@@ -33,7 +34,13 @@ async function loginUser(email, password) {
   return user;
 }
 
+async function regUser(name,email,pass){
+  const user = new usermodel({name,email,pass});
+  user.save();
+  return user;
+}
+
 const expmodel = mongoose.model("expenses",expenseschema);
 
 
-module.exports = {loginUser};  
+module.exports = {loginUser,regUser};  
