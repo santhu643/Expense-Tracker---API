@@ -40,7 +40,14 @@ async function regUser(name,email,pass){
   return user;
 }
 
+async function addExp(desc,amt,catog){
+  const exp = new expmodel({desc,amt,catog});
+  exp.save();
+  return exp;
+
+}
+
 const expmodel = mongoose.model("expenses",expenseschema);
 
 
-module.exports = {loginUser,regUser};  
+module.exports = {loginUser,regUser,addExp};  
