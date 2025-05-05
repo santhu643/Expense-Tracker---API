@@ -12,7 +12,12 @@ const Index = () => {
   async function addexp() {
     try{
     const data = {description,amount,category};
-    const result = await axios.get('http://localhost:3000/expense/addexp',data);
+    const result = await axios.post('http://localhost:3000/expense/addexp',data,{
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    
     if(result){
       alert('expense added');
     }
