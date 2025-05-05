@@ -83,7 +83,28 @@ import axios from "axios";
       if (modal) modal.style.display = show ? "flex" : "none";
     }
      
-
+    async function updatemodal(){
+      e.preventDefault();
+      try{
+      const data = {_id,desc,amt,catog};
+      console.log(data);
+      const result = await axios.post('http://localhost:3000/expense/editexp',data,{
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if(result.status==200){
+        setDescription("");
+        setAmount("");
+        setCategory("");
+        alert("expense edited");
+        fetch();
+      }
+      }
+      catch(err){
+        console.log('error occured');
+      }
+    }
   
 
   return (
@@ -150,7 +171,7 @@ import axios from "axios";
         <input type="text" value={edesc} onChange={(e) => setEdesc(e.target.value)} placeholder="Description" style={styles.input} />
         <input type="number" value={eamt} onChange={(e) => setEamt(e.target.value)} placeholder="Amount" style={styles.input} />
         <input type="text" value={ecatog} onChange={(e) => setEcatog(e.target.value)} placeholder="Category" style={styles.input} />
-        <button onClick={} style={{ ...styles.button, marginTop: "10px" }}>Update</button>
+        <button onClick={updatemodal} style={{ ...styles.button, marginTop: "10px" }}>Update</button>
         <button onClick={() => toggleModal(false)} style={{ marginLeft: "10px" }}>Cancel</button>
       </div>
     </div>
