@@ -1,33 +1,65 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const Index = () => {
 
+  const [description, setDescription] = useState('');
+  const [amount, setAmount] = useState('');
+  const [category, setCategory] = useState('');
+
+ 
+
+  useEffect(()=>{
+    fetch();
+  },[])
+
+  async function fetch() {
+    try{
+    const result = await axios.get('http://localhost:3000/expense/addexp');
+    if(result){
+      alert('expense added');
+    }
+
+    }
+    catch(err){
+      console.log('error occured');
+    }
+  }
+
+  
 
   return (
     <div style={styles.container}>
       <h1 style={styles.title}>Expense Tracker</h1>
 
       {/* Form */}
-      <form  style={styles.form}>
+      <form   onSubmit={(e) => {
+          e.preventDefault();
+          setDescription('');
+          setAmount('');
+          setCategory('');
+        }}
+        style={styles.form}>
         <input
           type="text"
           name="description"
           placeholder="Description"
-         
           style={styles.input}
+          onChange={(e) => setDescription(e.target.value)}
         />
         <input
           type="number"
           name="amount"
           placeholder="Amount"
-         
           style={styles.input}
+          onChange={(e) => setAmount(e.target.value)}
         />
         <input
           type="text"
           name="category"
           placeholder="Category"
           style={styles.input}
+          onChange={(e) => setCategory(e.target.value)}
         />
         <button type="submit" style={styles.button}>
           Add Expense
@@ -45,7 +77,7 @@ const Index = () => {
           </tr>
         </thead>
         <tbody>
-        
+
         </tbody>
       </table>
     </div>
