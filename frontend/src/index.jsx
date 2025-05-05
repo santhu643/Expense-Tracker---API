@@ -7,6 +7,19 @@ const Index = () => {
   const [amt, setAmount] = useState('');
   const [catog, setCategory] = useState('');
 
+  useEffect(()=>{
+    fetch();
+  },[]);
+
+  async function fetch(){
+    const data = await axios.get('http://localhost:3000/expense/getexp',{
+      headers:{
+        'Content-Type': 'application/json',
+      },
+    });
+    console.log(data.data);
+
+  }
 
 
   async function addexp(e) {
@@ -19,7 +32,10 @@ const Index = () => {
         'Content-Type': 'application/json',
       },
     });
-    if(result){
+    if(result.status==200){
+      setDescription(" ");
+      setAmount(" ");
+      setCategory(" ");
       
       alert("expense added");
 
@@ -44,6 +60,7 @@ const Index = () => {
           type="text"
           name="description"
           placeholder="Description"
+          value={desc}
           style={styles.input}
           onChange={(e) => setDescription(e.target.value)}
         />
@@ -51,6 +68,7 @@ const Index = () => {
           type="number"
           name="amount"
           placeholder="Amount"
+          value={amt}
           style={styles.input}
           onChange={(e) => setAmount(e.target.value)}
         />
@@ -58,6 +76,7 @@ const Index = () => {
           type="text"
           name="category"
           placeholder="Category"
+          value={catog}
           style={styles.input}
           onChange={(e) => setCategory(e.target.value)}
         />
