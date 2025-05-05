@@ -19,8 +19,6 @@ import axios from "axios";
         },
       });
       setData(resp.data.expenses);
-      
-
     }
 
 
