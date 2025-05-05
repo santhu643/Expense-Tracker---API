@@ -56,4 +56,4 @@ async function getExp() {
 
 
 
-module.exports = {loginUser,regUser,addExp};  
+module.exports = {loginUser,regUser,addExp,getExp};  
