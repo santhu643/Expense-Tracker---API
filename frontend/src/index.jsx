@@ -19,8 +19,6 @@ import axios from "axios";
         },
       });
       setData(resp.data.expenses);
-      
-
     }
 
 
@@ -106,7 +104,7 @@ import axios from "axios";
               <td>{dt.desc}</td>
               <td>{dt.amt}</td>
               <td>{dt.catog}</td>
-              <td><button>Edit</button>&nbsp;<button>Delete</button></td>
+              <td><button >Edit</button>&nbsp;<button>Delete</button></td>
 
 
 

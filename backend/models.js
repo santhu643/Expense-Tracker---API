@@ -54,6 +54,11 @@ async function getExp() {
   return data;
 }
 
+async function deleteExp(id) {
+  const data = expmodel.findByIdAndDelete({id});
+  data.save();
+  return data;
+}
 
 
-module.exports = {loginUser,regUser,addExp,getExp};  
+module.exports = {loginUser,regUser,addExp,getExp,deleteExp};  

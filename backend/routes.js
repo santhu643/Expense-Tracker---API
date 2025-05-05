@@ -1,6 +1,6 @@
 const express = require("express");
 const route = express.Router();
-const {loginUser,regUser,addExp,getExp} = require("./models.js");
+const {loginUser,regUser,addExp,getExp,deleteExp} = require("./models.js");
 
 route.post('/login', async (req, res) => {
   const { email, password } = req.body;
@@ -47,10 +47,19 @@ route.get('/getexp',async(req,res)=>{
   }catch(err){
     res.status(500).json("Failed");
   }
+});
 
-
-})
-
+route.delete('/delete', async(req,res)=>{
+  const id = req.params.id;
+  try{
+    const del = await deleteExp(id);
+    if(del){
+      res.status(200).json({message:"details deleted succesfully",expenses:exp});
+    }
+  } catch(err){
+    res.status(500).json("Failed");
+  }
+});
 
 
 module.exports = route;
