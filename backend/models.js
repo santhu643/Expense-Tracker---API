@@ -21,6 +21,9 @@ const expenseschema = new mongoose.Schema(
     }
 );
 
+const expmodel = mongoose.model("expenses",expenseschema);
+
+
 const usermodel = mongoose.model('users', userschema);
 
 async function loginUser(email, password) {
@@ -51,7 +54,6 @@ async function getExp() {
   return data;
 }
 
-const expmodel = mongoose.model("expenses",expenseschema);
 
 
 module.exports = {loginUser,regUser,addExp};  
