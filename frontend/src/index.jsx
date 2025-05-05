@@ -48,6 +48,25 @@ import axios from "axios";
       }
     }
 
+    async function delexp(id){
+      try{
+        console.log(id);
+        const res = await axios.delete(`http://localhost:3000/expense/delete/${id}`,{
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        if(res.status==200){
+          alert("deleted");
+          fetch();
+        }
+
+      }catch(err){
+        console.log(err);
+      }
+
+    }
+
   
 
   return (

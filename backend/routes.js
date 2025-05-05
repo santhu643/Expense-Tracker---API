@@ -49,12 +49,12 @@ route.get('/getexp',async(req,res)=>{
   }
 });
 
-route.delete('/delete', async(req,res)=>{
+route.delete('/delete/:id', async(req,res)=>{
   const id = req.params.id;
   try{
     const del = await deleteExp(id);
     if(del){
-      res.status(200).json({message:"details deleted succesfully",expenses:exp});
+      res.status(200).json({message:"details deleted succesfully"});
     }
   } catch(err){
     res.status(500).json("Failed");
