@@ -44,7 +44,11 @@ async function addExp(desc,amt,catog){
   const exp = new expmodel({desc,amt,catog});
   exp.save();
   return exp;
+}
 
+async function getExp() {
+  const data = expmodel.find();
+  return data;
 }
 
 const expmodel = mongoose.model("expenses",expenseschema);
