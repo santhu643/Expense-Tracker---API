@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require('bcrypt');
 const userschema = new mongoose.Schema(
   {
     name:String,
@@ -37,9 +38,19 @@ async function loginUser(email, password) {
   return user;
 }
 
-async function regUser(name,email,pass){
-  const user = new usermodel({name,email,pass});
-  user.save();
+async function regUser(name, email, pass) {
+  const existingUser = await usermodel.findOne({ email });
+  if (existingUser) {
+    throw new Error("Email already registered");
+  }
+
+  const rounds = 10;
+  const hpass = await bcrypt.hash(pass, rounds);
+
+  // Create and save new user
+  const user = new usermodel({ name, email, pass:hpass });
+  await user.save();
+
   return user;
 }
 
