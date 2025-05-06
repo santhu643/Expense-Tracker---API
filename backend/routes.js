@@ -1,6 +1,6 @@
 const express = require("express");
 const route = express.Router();
-const {loginUser,regUser,addExp,getExp,deleteExp} = require("./models.js");
+const {loginUser,regUser,addExp,getExp,deleteExp,updateExp} = require("./models.js");
 
 route.post('/login', async (req, res) => {
   const { email, password } = req.body;
@@ -60,6 +60,19 @@ route.delete('/delete/:id', async(req,res)=>{
     res.status(500).json("Failed");
   }
 });
+
+route.put('/updexp',async(req,res)=>{
+  const {id,desc,amt,catog} = req.body;
+  try{
+    const exp = await updateExp(id,desc,amt,catog);
+    if(exp){
+      res.status(200).json({message:"doneeee"});
+
+    }
+  }catch(err){
+    res.status(500).json("Failed to update");
+  }
+})
 
 
 module.exports = route;

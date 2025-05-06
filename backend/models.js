@@ -59,19 +59,14 @@ async function deleteExp(id) {
   return data;
 }
 
-// async function updateExp() {
-//   try {
-//     const updated = { desc: edesc, amt: eamt, catog: ecatog };
-//     const res = await axios.put(`http://localhost:3000/expense/edit/${eid}`, updated);
-//     if (res.status === 200) {
-//       alert("Expense updated!");
-//       toggleModal(false);
-//       fetch();
-//     }
-//   } catch (err) {
-//     console.error("Error updating:", err);
-//   }
-// }
+async function updateExp(id,desc,amt,catog){
+  await expmodel.findByIdAndUpdate(
+    id,                          
+    { desc, amt, catog },        
+    { new: true }                
+  );  
+
+}
 
 
 module.exports = {loginUser,regUser,addExp,getExp,deleteExp};  
