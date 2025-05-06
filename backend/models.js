@@ -60,13 +60,14 @@ async function deleteExp(id) {
 }
 
 async function updateExp(id,desc,amt,catog){
-  await expmodel.findByIdAndUpdate(
+  const res = await expmodel.findByIdAndUpdate(
     id,                          
     { desc, amt, catog },        
     { new: true }                
-  );  
+  );
+  return res;  
 
 }
 
 
-module.exports = {loginUser,regUser,addExp,getExp,deleteExp};  
+module.exports = {loginUser,regUser,addExp,getExp,deleteExp,updateExp};  

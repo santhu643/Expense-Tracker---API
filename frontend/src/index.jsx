@@ -74,8 +74,7 @@ import axios from "axios";
       setEcatog(dt.catog);
       setEid(dt._id);
       toggleModal(true);
-      console.log(edesc);
-      console.log(eamt);
+     
     }
 
     function toggleModal(show) {
@@ -83,22 +82,24 @@ import axios from "axios";
       if (modal) modal.style.display = show ? "flex" : "none";
     }
      
-    async function updatemodal(){
+    async function updatemodal(e){
       e.preventDefault();
       try{
-      const data = {_id,desc,amt,catog};
+      const data = {eid,edesc,eamt,ecatog};
       console.log(data);
-      const result = await axios.post('http://localhost:3000/expense/editexp',data,{
+      const result = await axios.put('http://localhost:3000/expense/updexp',data,{
         headers: {
           'Content-Type': 'application/json',
         },
       });
       if(result.status==200){
-        setDescription("");
-        setAmount("");
-        setCategory("");
+        setEdesc("");
+        setEamt("");
+        setEcatog("");
+        setEid("");
         alert("expense edited");
         fetch();
+        toggleModal(false);
       }
       }
       catch(err){
@@ -165,7 +166,10 @@ import axios from "axios";
               
             </tr>
           )}
-  <div className="modal" id="editModal" style={{ display: "none", position: "fixed", top: 0, left: 0, backgroundColor: "#00000090", width: "100%", height: "100%", justifyContent: "center", alignItems: "center" }}>
+ 
+        </tbody>
+      </table>
+      <div className="modal" id="editModal" style={{ display: "none", position: "fixed", top: 0, left: 0, backgroundColor: "#00000090", width: "100%", height: "100%", justifyContent: "center", alignItems: "center" }}>
       <div style={{ background: "#fff", padding: "20px", borderRadius: "10px", width: "300px", position: "relative" }}>
         <h3>Edit Expense</h3>
         <input type="text" value={edesc} onChange={(e) => setEdesc(e.target.value)} placeholder="Description" style={styles.input} />
@@ -175,8 +179,6 @@ import axios from "axios";
         <button onClick={() => toggleModal(false)} style={{ marginLeft: "10px" }}>Cancel</button>
       </div>
     </div>
-        </tbody>
-      </table>
     </div>
     
    

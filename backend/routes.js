@@ -62,9 +62,9 @@ route.delete('/delete/:id', async(req,res)=>{
 });
 
 route.put('/updexp',async(req,res)=>{
-  const {id,desc,amt,catog} = req.body;
+  const {eid,edesc,eamt,ecatog} = req.body;
   try{
-    const exp = await updateExp(id,desc,amt,catog);
+    const exp = await updateExp(eid,edesc,eamt,ecatog);
     if(exp){
       res.status(200).json({message:"doneeee"});
 
