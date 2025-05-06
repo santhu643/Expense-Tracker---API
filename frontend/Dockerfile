@@ -1,8 +1,12 @@
-# frontend/Dockerfile
-FROM node:23
+FROM node:18
+
 WORKDIR /app
-COPY . .
+
+COPY package*.json ./
 RUN npm install
-RUN npm run build   # Optionally build if you want to serve a production version
+
+COPY . .
+
 EXPOSE 5173
+
 CMD ["npm", "run", "dev"]

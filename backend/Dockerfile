@@ -1,8 +1,12 @@
-# backend/Dockerfile
-FROM node:23
+FROM node:18
+
 WORKDIR /app
-COPY . .
+
+COPY package*.json ./
 RUN npm install
-RUN chmod +x ./node_modules/.bin/nodemon  # Fix execute permissions for nodemon
+
+COPY . .
+
 EXPOSE 3000
+
 CMD ["npm", "run", "dev"]

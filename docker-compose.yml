@@ -1,21 +1,22 @@
-version: "3"
-services:
-  backend:
-    build: ./backend
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./backend:/app
-    working_dir: /app
-    command: npm run dev
-    restart: unless-stopped
+version: '3.9'
 
+services:
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
     ports:
       - "5173:5173"
     volumes:
       - ./frontend:/app
     working_dir: /app
     command: npm run dev
-    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend:/app
+    working_dir: /app
+    command: npm run dev
