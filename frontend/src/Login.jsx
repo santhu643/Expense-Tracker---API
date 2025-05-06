@@ -16,6 +16,9 @@ const Login = () => {
           'Content-Type': 'application/json',
         },
       });
+      console.log(res.data.token);
+      localStorage.setItem("token", res.data.token);
+
 
       alert('Login successful');
       navigate('/index');

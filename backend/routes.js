@@ -5,12 +5,15 @@ const {loginUser,regUser,addExp,getExp,deleteExp,updateExp} = require("./models.
 route.post('/login', async (req, res) => {
   const { email, password } = req.body;
   try {
-    const user = await loginUser(email, password);
-    if(user){
-      res.status(200).json({ message: 'Login success' });
+    const token = await loginUser(email, password);
+
+    if (token === "Invalid user" || token === "Invalid password") {
+      return res.status(400).json({ message: token });
     }
+
+    res.status(200).json({ message: 'Login success', token });
   } catch (err) {
-    res.status(500).json("Failed");
+    res.status(500).json({ message: "Failed", error: err.message });
   }
 });
 
