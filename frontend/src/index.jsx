@@ -7,6 +7,7 @@ import axios from "axios";
     const [amt, setAmount] = useState('');
     const [catog, setCategory] = useState('');
     const [expdata,setData] = useState([]);
+    const [totamt,setTotamt] = useState(0);
   
     const[edesc,setEdesc] = useState('');
     const[eamt,setEamt] = useState('');
@@ -23,7 +24,10 @@ import axios from "axios";
           'Content-Type': 'application/json',
         },
       });
-      setData(resp.data.expenses);
+      const {data,total} = resp.data.expenses;
+      setData(data);
+      setTotamt(total);
+
     }
 
 
@@ -145,6 +149,7 @@ import axios from "axios";
       </form>
 
       {/* Expense Table */}
+      <h3>Total Expenses : {totamt}</h3>
       <table style={styles.table}>
         <thead>
           <tr>
@@ -169,6 +174,12 @@ import axios from "axios";
  
         </tbody>
       </table>
+      
+      
+
+
+
+
       <div className="modal" id="editModal" style={{ display: "none", position: "fixed", top: 0, left: 0, backgroundColor: "#00000090", width: "100%", height: "100%", justifyContent: "center", alignItems: "center" }}>
       <div style={{ background: "#fff", padding: "20px", borderRadius: "10px", width: "300px", position: "relative" }}>
         <h3>Edit Expense</h3>

@@ -50,8 +50,11 @@ async function addExp(desc,amt,catog){
 }
 
 async function getExp() {
-  const data = expmodel.find();
-  return data;
+  const data = await expmodel.find();
+  const total = data.reduce((sum,item)=>sum + (item.amt || 0),0 );
+
+
+  return {data,total};
 }
 
 async function deleteExp(id) {
