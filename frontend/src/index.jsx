@@ -163,12 +163,26 @@ import axios from "axios";
         <tbody>
           {expdata.map((dt,index)=>
             <tr key={dt._id}>
-              <td>{index+1}</td>
-              <td>{dt.desc}</td>
-              <td>{dt.amt}</td>
-              <td>{dt.catog}</td>
-              <td><button onClick={()=>updexp(dt)} data-toggle="modal" data-target="#exampleModal">Edit</button>&nbsp;<button value={dt._id} onClick={(e)=>delexp(e.target.value)}>Delete</button></td>
-              
+              <td style={styles.td}>{index+1}</td>
+              <td style={styles.td}>{dt.desc}</td>
+              <td style={styles.td}>{dt.amt}</td>
+              <td style={styles.td}>{dt.catog}</td>
+              <td style={styles.td}>
+                <button
+                  onClick={() => updexp(dt)}
+                  style={styles.editButton}
+                >
+                  ✏️ Edit
+                </button>
+                <button
+                  value={dt._id}
+                  onClick={(e) => delexp(e.target.value)}
+                  style={styles.deleteButton}
+                >
+                  🗑️ Delete
+                </button>
+              </td>
+
             </tr>
           )}
  
@@ -201,6 +215,56 @@ import axios from "axios";
 
 
 const styles = {
+  editButton: {
+    padding: "6px 12px",
+    marginRight: "8px",
+    border: "none",
+    borderRadius: "5px",
+    backgroundColor: "#1976d2", // Blue
+    color: "#fff",
+    cursor: "pointer",
+    fontWeight: "bold",
+    transition: "background 0.2s",
+  },
+  
+  deleteButton: {
+    padding: "6px 12px",
+    border: "none",
+    borderRadius: "5px",
+    backgroundColor: "#d32f2f", // Red
+    color: "#fff",
+    cursor: "pointer",
+    fontWeight: "bold",
+    transition: "background 0.2s",
+  },
+  
+  tableButton: {
+    padding: "6px 12px",
+    margin: "2px",
+    borderRadius: "4px",
+    border: "1px solid #4caf50",
+    backgroundColor: "#e8f5e9",
+    cursor: "pointer",
+    fontWeight: "bold",
+  },
+
+  th: {
+    background: "#2196f3",
+    color: "#fff",
+    padding: "10px",
+    textAlign: "center", // <-- center heading
+  },
+  table: {
+    width: "100%",
+    borderCollapse: "collapse",
+    marginTop: "20px",
+  },
+  td: {
+    padding: "10px",
+    borderBottom: "1px solid #ddd",
+    textAlign: "center",
+  },
+
   container: {
     maxWidth: "800px",
     margin: "0 auto",
