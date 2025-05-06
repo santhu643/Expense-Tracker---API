@@ -27,14 +27,23 @@ const expmodel = mongoose.model("expenses",expenseschema);
 const usermodel = mongoose.model('users', userschema);
 
 async function loginUser(email, password) {
-  const user = await usermodel.findOne({ email });
-  if (!user) {
-    throw new Error('User not found');
-  }
-  if (user.pass !== password) {
-    throw new Error('Incorrect password');
-  }
-  return user;
+  const data = await usermodel.findOne({ email });
+      if(!data){
+          return "Invalid user";
+      }
+      const data1 = await bcrypt.compare(pass,data.pass);
+      if(!data1){
+          return "Invalid password";
+      }
+  
+      const token = jwt.sign(
+          {id:data._id,email:data.email},
+          scretKey ,
+          {
+            expiresIn :'1h'
+          }
+      )
+      return token;
 }
 
 async function regUser(name,email,pass){
