@@ -9,7 +9,8 @@ import { useNavigate } from 'react-router-dom';
     const navigate = useNavigate(); 
     
 
-    async function register(){
+    async function register(e){
+      e.preventDefault();
       const user = {name,email,pass};
       try {
         const res = await axios.post('http://localhost:3000/expense/register', user, {
