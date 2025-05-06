@@ -5,18 +5,18 @@ services:
     build:
       context: ./frontend
     ports:
-      - "5173:5173"
+      - "5173:5173"  # Mapping frontend port
     volumes:
-      - ./frontend:/app
+      - ./frontend:/app  # Mounts frontend directory into container
     working_dir: /app
-    command: npm run dev
+    command: npm run dev  # Run the frontend dev server
 
   backend:
     build:
       context: ./backend
     ports:
-      - "3000:3000"
+      - "3000:3000"  # Mapping backend port
     volumes:
-      - ./backend:/app
+      - ./backend:/app  # Mounts backend directory into container
     working_dir: /app
-    command: npm run dev
+    command: npm run dev  # Run the backend dev server
