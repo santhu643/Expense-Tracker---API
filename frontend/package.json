@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "serve":"vite preview --port 5713",
+
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -15,7 +17,8 @@
     "dotenv": "^16.5.0",
     "jsonwebtoken": "^9.0.2",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.5.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
