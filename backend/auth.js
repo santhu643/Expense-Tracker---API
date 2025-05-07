@@ -1,25 +1,21 @@
-// auth.js (create this new file or put it in your main file)
 const jwt = require('jsonwebtoken');
-const dotenv = require('dotenv');
-dotenv.config();
+const secretKey = "mysecretkey";
 
-const verifyToken = (req, res, next) => {
+function authenticateToken(req, res, next) {
   const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1]; // Expected format: "Bearer <token>"
 
-  if (!authHeader) {
-    return res.status(403).json({ message: "No token provided" });
+  if (!token) {
+    return res.status(401).json({ message: "Access token missing" });
   }
 
-  const token = authHeader.split(' ')[1];
-
-  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-    if (err) {
-      return res.status(401).json({ message: "Invalid or expired token" });
-    }
-
-    req.user = decoded; 
+  jwt.verify(token, secretKey, (err, user) => {
+    if (err) return res.status(403).json({ message: "Invalid token" });
+    
+    req.user = user; // token payload is now available as req.user
+    console.log("verified successfully");
     next();
   });
-};
+}
 
-module.exports = verifyToken;
+module.exports = authenticateToken;

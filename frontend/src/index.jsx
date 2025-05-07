@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+
   const Index = () => {
 
     const [desc, setDescription] = useState('');
@@ -18,20 +19,30 @@ import axios from "axios";
       fetch();
     },[]);  
 
-    async function fetch(){
-      const resp = await axios.get('http://localhost:3000/expense/getexp',{
-        headers:{
-          'Content-Type': 'application/json',
-        },
-      });
-      const {data,total} = resp.data.expenses;
-      setData(data);
-      setTotamt(total);
-
+    async function fetch() {
+      const token = localStorage.getItem("token"); // Get token here
+    
+      try {
+        const resp = await axios.get('http://localhost:3000/expense/getexp', {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        });
+    
+        const { data, total } = resp.data.expenses; // Adjust this line based on your actual response structure
+        setData(data);
+        setTotamt(total);
+      } catch (error) {
+        console.error("Failed to fetch expenses:", error.response?.data || error.message);
+      }
     }
+    
 
 
     async function addexp(e) {
+      const token = localStorage.getItem("token"); // Get token here
+
       e.preventDefault();
       try{
       const data = {desc,amt,catog};
@@ -39,6 +50,7 @@ import axios from "axios";
       const result = await axios.post('http://localhost:3000/expense/addexp',data,{
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
         },
       });
       if(result.status==200){
@@ -58,6 +70,8 @@ import axios from "axios";
     }
 
     async function delexp(id){
+      const token = localStorage.getItem("token"); // Get token here
+
       try{
         console.log(id);
         const res = await axios.delete(`http://localhost:3000/expense/delete/${id}`);
@@ -87,6 +101,8 @@ import axios from "axios";
     }
      
     async function updatemodal(e){
+      const token = localStorage.getItem("token"); // Get token here
+
       e.preventDefault();
       try{
       const data = {eid,edesc,eamt,ecatog};
