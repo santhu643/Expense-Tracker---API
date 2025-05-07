@@ -1,0 +1,17 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# React build
+build/
+.env
+
+# OS and IDE files
+.DS_Store
+.vscode/
+.idea/
+
+# Docker
+.docker/

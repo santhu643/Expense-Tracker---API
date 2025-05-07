@@ -1,21 +1,20 @@
-# backend/Dockerfile
+# Step 1: Use official Node.js image as a base image
+FROM node:16-alpine
 
-FROM node:18
-
-# Set working directory
+# Step 2: Set working directory in the container
 WORKDIR /app
 
-# Copy package.json and lock file
+# Step 3: Copy package.json and package-lock.json (or yarn files) into the container
 COPY package*.json ./
 
-# Install all dependencies (including dev)
+# Step 4: Install dependencies
 RUN npm install
 
-# Copy the rest of the backend code
+# Step 5: Copy all other project files into the container
 COPY . .
 
-# Expose backend port
-EXPOSE 3000
+# Step 6: Expose the port on which the Node.js app will run
+EXPOSE 5000
 
-# Start the backend server
-CMD ["npm", "run", "dev"]
+# Step 7: Start the Node.js server
+CMD ["npm", "start"]

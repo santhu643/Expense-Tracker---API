@@ -1,22 +1,17 @@
-version: '3.9'
-
+version: "3.8"
 services:
   frontend:
     build:
       context: ./frontend
     ports:
-      - "5173:5173"  # Mapping frontend port
-    volumes:
-      - ./frontend:/app  # Mounts frontend directory into container
-    working_dir: /app
-    command: npm run dev  # Run the frontend dev server
+      - "3000:3000"
+    depends_on:
+      - backend
 
   backend:
     build:
       context: ./backend
     ports:
-      - "3000:3000"  # Mapping backend port
-    volumes:
-      - ./backend:/app  # Mounts backend directory into container
-    working_dir: /app
-    command: npm run dev  # Run the backend dev server
+      - "5000:5000"
+    environment:
+      - NODE_ENV=production
