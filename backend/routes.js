@@ -1,5 +1,6 @@
 const express = require("express");
 const route = express.Router();
+const verifytoken = require('./auth');
 const {loginUser,regUser,addExp,getExp,deleteExp,updateExp} = require("./models.js");
 
 route.post('/login', async (req, res) => {
@@ -29,7 +30,7 @@ route.post('/register',async(req,res)=>{
   }
 });
 
-route.post('/addexp',async(req,res)=>{
+route.post('/addexp',verifytoken,async(req,res)=>{
   const {desc,amt,catog} = req.body;
   try{
     const exp = await addExp(desc,amt,catog);
@@ -41,7 +42,7 @@ route.post('/addexp',async(req,res)=>{
   }
 });
 
-route.get('/getexp',async(req,res)=>{
+route.get('/getexp',verifytoken,async(req,res)=>{
   try{
     const exp = await getExp();
     if(exp){
@@ -52,7 +53,7 @@ route.get('/getexp',async(req,res)=>{
   }
 });
 
-route.delete('/delete/:id', async(req,res)=>{
+route.delete('/delete/:id',verifytoken, async(req,res)=>{
   const id = req.params.id;
   try{
     const del = await deleteExp(id);
@@ -64,7 +65,7 @@ route.delete('/delete/:id', async(req,res)=>{
   }
 });
 
-route.put('/updexp',async(req,res)=>{
+route.put('/updexp',verifytoken,async(req,res)=>{
   const {eid,edesc,eamt,ecatog} = req.body;
   try{
     const exp = await updateExp(eid,edesc,eamt,ecatog);
