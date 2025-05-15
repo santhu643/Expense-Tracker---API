@@ -38,21 +38,13 @@ Expense-Tracker---API/
 │   └── db.js                # MongoDB connection setup
 ├── controllers/
 │   └── expenseController.js # Logic for handling expense operations
-
 ├── models/
-
 │   └── Expense.js           # Mongoose schema for expenses
-
 ├── routes/
-
 │   └── expenseRoutes.js     # Defines API routes
-
 ├── .env                     # Environment variables (e.g., DB URI, PORT)
-
 ├── server.js                # Main server entry point
-
 ├── package.json             # Project metadata and dependencies
-
 └── README.md                # Project documentation
 
 ````
