@@ -35,11 +35,8 @@ This project is built using **Node.js**, **Express.js**, and **MongoDB** to prov
 
 Expense-Tracker---API/
 ├── config/
-
 │   └── db.js                # MongoDB connection setup
-
 ├── controllers/
-
 │   └── expenseController.js # Logic for handling expense operations
 
 ├── models/
