@@ -1,6 +1,3 @@
-Here’s a complete `README.md` file for your **Expense Tracker - API** project:
-
-```markdown
 # 💰 Expense Tracker - API
 
 Welcome to the **Expense Tracker - API** repository!  
